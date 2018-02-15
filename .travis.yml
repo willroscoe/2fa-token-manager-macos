@@ -4,7 +4,14 @@ osx_image: xcode8.3
 language: objective-c # workaround - is swift really!
 xcode_project: Otp Token Manager.xcodeproj
 xcode_scheme: Otp Token Manager
- 
+
+branches:
+  only:
+  - master
+
+before_install:
+  - brew update
+  - brew outdated xctool || brew upgrade xctool
 
 
 #notifications:
