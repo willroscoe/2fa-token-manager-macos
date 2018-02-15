@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="CollectionViewItem" customModule="Otp_Token_Manager" customModuleProvider="target">
+            <connections>
+                <outlet property="nameLabel" destination="Mel-jG-B88" id="ryD-WO-s0t"/>
+                <outlet property="tokenLabel" destination="0C6-5r-nnn" id="zq0-B0-FF7"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <collectionViewItem identifier="totp" id="ja3-Gi-YVj" customClass="CollectionViewItem" customModule="Otp_Token_Manager" customModuleProvider="target">
+            <connections>
+                <outlet property="nameLabel" destination="Mel-jG-B88" id="vrs-bw-LaP"/>
+                <outlet property="progressBar" destination="uwb-oB-RlT" id="n4i-oQ-jVM"/>
+                <outlet property="textField" destination="0C6-5r-nnn" id="mwO-ix-mdp"/>
+                <outlet property="tokenLabel" destination="0C6-5r-nnn" id="60R-mU-Slz"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="Aua-BM-RJ1"/>
+            </connections>
+        </collectionViewItem>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView appearanceType="aqua" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="290"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0C6-5r-nnn">
+                    <rect key="frame" x="208" y="238" width="65" height="30"/>
+                    <contentFilters>
+                        <ciFilter name="CIBoxBlur">
+                            <configuration>
+                                <null key="inputImage"/>
+                                <real key="inputRadius" value="17"/>
+                            </configuration>
+                        </ciFilter>
+                    </contentFilters>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="EaM-Pr-58l">
+                        <font key="font" metaFont="system" size="25"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <progressIndicator wantsLayer="YES" maxValue="100" displayedWhenStopped="NO" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="uwb-oB-RlT">
+                    <rect key="frame" x="190" y="219" width="100" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="2XB-r5-7Wr"/>
+                    </constraints>
+                </progressIndicator>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mel-jG-B88">
+                    <rect key="frame" x="222" y="268" width="37" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="Fpe-dj-6Ov">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="0C6-5r-nnn" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="1hA-cr-2gS"/>
+                <constraint firstItem="Mel-jG-B88" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="LdA-UP-ED6"/>
+                <constraint firstItem="uwb-oB-RlT" firstAttribute="top" secondItem="0C6-5r-nnn" secondAttribute="bottom" id="UYJ-gQ-lKw"/>
+                <constraint firstItem="0C6-5r-nnn" firstAttribute="top" secondItem="Mel-jG-B88" secondAttribute="bottom" id="kRs-g2-DR1"/>
+                <constraint firstItem="uwb-oB-RlT" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="kaT-8I-gAC"/>
+                <constraint firstItem="Mel-jG-B88" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="uEI-lU-Q59"/>
+            </constraints>
+        </customView>
+    </objects>
+</document>
