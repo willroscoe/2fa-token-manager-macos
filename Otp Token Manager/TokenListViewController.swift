@@ -29,7 +29,7 @@ class TokenListViewController: NSViewController {
         
     }
     @IBAction func addBtnAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "addItemSegue", sender: self)
+        self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "addItemSegue"), sender: self)
     }
     
     @IBAction func deleteBtnAction(_ sender: Any) {
@@ -53,7 +53,7 @@ class TokenListViewController: NSViewController {
     
     @IBAction func editBtnAction(_ sender: Any) {
         if (selectedIndex != nil) {
-            self.performSegue(withIdentifier: "editItemSegue", sender: self)
+            self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "editItemSegue"), sender: self)
         }
     }
     
@@ -102,11 +102,11 @@ class TokenListViewController: NSViewController {
     
     @IBAction func ChangePasswordMenuAction(_ sender: Any) { // this is connected via the manual first responder attributes
         if (share.screen_protect) {
-            dialogOKCancel(title: "Screen Protect: Change Password is currently disabled", msg: "", cancel: false, cancelTitle: "", alertType: NSAlertStyle.critical)
+            dialogOKCancel(title: "Screen Protect: Change Password is currently disabled", msg: "", cancel: false, cancelTitle: "", alertType: NSAlert.Style.critical)
         } else {
             action_do_save_as = false
             action_for_change_password = true
-            self.performSegue(withIdentifier: "setPasswordSegue", sender: self)
+            self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "setPasswordSegue"), sender: self)
         }
     }
 
@@ -176,7 +176,7 @@ class TokenListViewController: NSViewController {
         
     }
     
-    func ScreenProtectionTimeout() {
+    @objc func ScreenProtectionTimeout() {
         // 
         screen_protect_timer?.invalidate()
         if (share.otp_items.count > 0) {
@@ -189,11 +189,11 @@ class TokenListViewController: NSViewController {
             UpdateBtns(enable: false)
             
             // update menu items
-            if let appDel = NSApplication.shared().delegate as? AppDelegate {
+            if let appDel = NSApplication.shared.delegate as? AppDelegate {
                 appDel.enableMenus(new: true, save: false, saveAs: false, changePassord: false, prefs: false)
             }
             
-            self.performSegue(withIdentifier: "screenProtectSegue", sender: self)
+            self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "screenProtectSegue"), sender: self)
         }
 
     }
@@ -202,14 +202,14 @@ class TokenListViewController: NSViewController {
         if (set) {
             editBtn.isHidden = true
             qrCodeBtn.isHidden = true
-            if let appDel = NSApplication.shared().delegate as? AppDelegate {
+            if let appDel = NSApplication.shared.delegate as? AppDelegate {
                 appDel.hideMenus(new: true, save: false, saveAs: true, changePassord: true, prefs: true)
             }
 
         } else {
             editBtn.isHidden = false
             qrCodeBtn.isHidden = false
-            if let appDel = NSApplication.shared().delegate as? AppDelegate {
+            if let appDel = NSApplication.shared.delegate as? AppDelegate {
                 appDel.hideMenus(new: false, save: false, saveAs: false, changePassord: false, prefs: false)
             }
 
@@ -225,7 +225,7 @@ class TokenListViewController: NSViewController {
         
         //if (data.success) { // go to unlock view
             share.encrypted_data = data.string
-            self.performSegue(withIdentifier: "unlockSegue", sender: self)
+            self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "unlockSegue"), sender: self)
         /*}
         else
         {
@@ -275,7 +275,7 @@ class TokenListViewController: NSViewController {
         if (!share.travel_mode) { // don't save anything in travel mode
             
             if (share.screen_protect) {
-                dialogOKCancel(title: "Screen Protect: Save is currently disabled", msg: "", cancel: false, cancelTitle: "", alertType: NSAlertStyle.critical)
+                dialogOKCancel(title: "Screen Protect: Save is currently disabled", msg: "", cancel: false, cancelTitle: "", alertType: NSAlert.Style.critical)
             } else if (share.passphrase != nil) {
                 
                 let dataToEncrypt = FileUtils().DeserialiseOtpArrayToJsonString(otp_items: share.otp_items)
@@ -296,21 +296,21 @@ class TokenListViewController: NSViewController {
                             share.plain_data = dataToEncrypt
                         }
                         if (!saveas || for_change_password) {
-                            dialogOKCancel(title: dialog_title, msg: dialog_msg, cancel: false, cancelTitle: "", alertType: NSAlertStyle.informational)
+                            dialogOKCancel(title: dialog_title, msg: dialog_msg, cancel: false, cancelTitle: "", alertType: NSAlert.Style.informational)
                         }
                         
                     } else {
                         // save error
-                        dialogOKCancel(title: "Error: The data was not saved", msg: "", cancel: false, cancelTitle: "", alertType: NSAlertStyle.critical)
+                        dialogOKCancel(title: "Error: The data was not saved", msg: "", cancel: false, cancelTitle: "", alertType: NSAlert.Style.critical)
                     }
                 } else {
-                    dialogOKCancel(title: "Error: There was a problem encrypting the data", msg: "", cancel: false, cancelTitle: "", alertType: NSAlertStyle.critical)
+                    dialogOKCancel(title: "Error: There was a problem encrypting the data", msg: "", cancel: false, cancelTitle: "", alertType: NSAlert.Style.critical)
                 }
                 
                 
             } else {
                 // send to password controller
-                self.performSegue(withIdentifier: "setPasswordSegue", sender: self)
+                self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "setPasswordSegue"), sender: self)
             }
         }
         TryStartScreenProtectTimer()
@@ -335,7 +335,7 @@ class TokenListViewController: NSViewController {
             share.do_travel_mode()
         } else {
             editBtn.isHidden = false
-            if let appDel = NSApplication.shared().delegate as? AppDelegate {
+            if let appDel = NSApplication.shared.delegate as? AppDelegate {
                 appDel.hideMenus(new: false, save: false, saveAs: false, changePassord: false, prefs: false)
             }
         }
@@ -353,7 +353,7 @@ class TokenListViewController: NSViewController {
             collectionView.reloadData()
             TryStartScreenProtectTimer()
             // enable menu items
-            if let appDel = NSApplication.shared().delegate as? AppDelegate {
+            if let appDel = NSApplication.shared.delegate as? AppDelegate {
                 appDel.enableMenus(new: true, save: true, saveAs: true, changePassord: true, prefs: true)
             }
         }
@@ -368,26 +368,26 @@ class TokenListViewController: NSViewController {
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         
-        if(segue.identifier == "unlockSegue") {
+        if(segue.identifier!.rawValue == "unlockSegue") {
             let nextViewController = (segue.destinationController as! PasswordViewController)
             nextViewController.action_setpassword = false
-        } else if (segue.identifier == "setPasswordSegue") {
+        } else if (segue.identifier!.rawValue == "setPasswordSegue") {
             let nextViewController = (segue.destinationController as! PasswordViewController)
             nextViewController.action_setpassword = true
             nextViewController.action_dosaveas = action_do_save_as
             nextViewController.action_for_change_password = action_for_change_password
-        } else if (segue.identifier == "screenProtectSegue") {
+        } else if (segue.identifier!.rawValue == "screenProtectSegue") {
             let nextViewController = (segue.destinationController as! PasswordViewController)
             nextViewController.action_setpassword = false
             nextViewController.action_dosaveas = false
             nextViewController.action_for_change_password = false
-        } else if (segue.identifier == "editItemSegue") {
+        } else if (segue.identifier!.rawValue == "editItemSegue") {
             let nextViewController = (segue.destinationController as! EditItemViewController)
             var thisItem = share.otp_items[selectedIndex!]
             thisItem.action = OtpAction.Edit
             thisItem.index = selectedIndex
             nextViewController.otp_item = share.otp_items[selectedIndex!]
-        } else if (segue.identifier == "addItemSegue") {
+        } else if (segue.identifier!.rawValue == "addItemSegue") {
             let nextViewController = (segue.destinationController as! EditItemViewController)
             var thisItem: Otp = Otp()
             thisItem.action = OtpAction.Add
@@ -417,7 +417,7 @@ class TokenListViewController: NSViewController {
         TryStartScreenProtectTimer()
     }
     
-    func dialogOKCancel(title: String, msg:String, cancel:Bool = false, cancelTitle:String = "Cancel", alertType: NSAlertStyle = NSAlertStyle.warning) -> Bool {
+    func dialogOKCancel(title: String, msg:String, cancel:Bool = false, cancelTitle:String = "Cancel", alertType: NSAlert.Style = NSAlert.Style.warning) -> Bool {
         let myPopup: NSAlert = NSAlert()
         myPopup.messageText = title
         myPopup.informativeText = msg
@@ -427,7 +427,7 @@ class TokenListViewController: NSViewController {
             myPopup.addButton(withTitle: cancelTitle)
         }
         TryStartScreenProtectTimer()
-        return myPopup.runModal() == NSAlertFirstButtonReturn
+        return myPopup.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
     }
 
 }
@@ -450,7 +450,7 @@ extension TokenListViewController : NSCollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-        let cell = collectionView.makeItem(withIdentifier: "CollectionViewItem", for: indexPath) as! CollectionViewItem
+        let cell = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CollectionViewItem"), for: indexPath) as! CollectionViewItem
         
         let token = share.otp_items[indexPath.item]
         cell.otp = token
@@ -470,7 +470,7 @@ extension TokenListViewController : NSCollectionViewDelegate {
             return
         }
         if (share.screen_protect) {
-            self.performSegue(withIdentifier: "screenProtectSegue", sender: self)
+            self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "screenProtectSegue"), sender: self)
         } else {
             selectedIndex = indexPath.item
             UpdateBtns(enable: true)

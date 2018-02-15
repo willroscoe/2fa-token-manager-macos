@@ -95,7 +95,7 @@ class EditItemViewController: NSViewController {
     }
     
     @IBAction func digitsAction(_ sender: NSSegmentedControl) {
-        let clickedSegment = sender.selectedSegment.toIntMax()
+        let clickedSegment = Int64(sender.selectedSegment)
         if (clickedSegment == 0) {
             if (otp_item?.digits == 8) {
                 otp_item?.digits = 6
@@ -110,7 +110,7 @@ class EditItemViewController: NSViewController {
         
     }
     @IBAction func intervalAction(_ sender: NSSegmentedControl) {
-        let clickedSegment = sender.selectedSegment.toIntMax()
+        let clickedSegment = Int64(sender.selectedSegment)
         if (clickedSegment == 0) {
             if ((otp_item?.interval)! > 5) {
                 otp_item?.interval -= 1

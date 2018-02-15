@@ -17,8 +17,6 @@ class FileUtils {
     
     public func GetDatafilePath() -> URL? {
         
-        var tmpsdf = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)
-        
         if let pathURL = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first
         {
             return pathURL.appendingPathComponent("2fa_otp.otp");

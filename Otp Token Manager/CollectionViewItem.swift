@@ -77,16 +77,16 @@ class CollectionViewItem: NSCollectionViewItem {
     }
     
     
-    func timerCallback(timer: Timer) {
+    @objc func timerCallback(timer: Timer) {
         UpdateDisplay()
 
     }
     
     func CopyTokenToClipboard() {
         if (!share.screen_protect) {
-            let pasteboard = NSPasteboard.general()
-            pasteboard.declareTypes([NSPasteboardTypeString], owner: nil)
-            pasteboard.setString(tokenLabel.stringValue.replacingOccurrences(of: " ", with: ""), forType: NSPasteboardTypeString)
+            let pasteboard = NSPasteboard.general
+            pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
+            pasteboard.setString(tokenLabel.stringValue.replacingOccurrences(of: " ", with: ""), forType: NSPasteboard.PasteboardType.string)
             storedToken = tokenLabel.stringValue
         }
     }
