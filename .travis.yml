@@ -13,6 +13,7 @@ before_install:
   - brew update
   - brew outdated xctool || brew upgrade xctool
 
+script: xcodebuild clean && xcodebuild build -project Otp Token Manager.xcodeproj -scheme Otp Token Manager
 
 #notifications:
 #  slack:
